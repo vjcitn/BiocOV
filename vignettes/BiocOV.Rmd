@@ -1,0 +1,59 @@
+---
+title: "BiocOV: an overview of Bioconductor for Genomic Data Science"
+author: "Vincent J. Carey, stvjc at channing.harvard.edu"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{BiocOV: an overview of Bioconductor for Genomic Data Science}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document:
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+---
+
+# Introduction
+
+This package includes vignettes, functions and illustrative data on the
+following topics
+
+- MultiAssayExperiment representation of The Cancer Genome Atlas, with
+illustration of survival analysis
+
+![](tcgaface.jpg)
+
+- Genome representation with Biostrings, BSgenome, and TxDb packages
+
+```
+> TxDb.Hsapiens.UCSC.hg38.knownGene
+TxDb object:
+# Db type: TxDb
+# Supporting package: GenomicFeatures
+# Data source: UCSC
+# Genome: hg38
+# Organism: Homo sapiens
+# Taxonomy ID: 9606
+# UCSC Table: knownGene
+# UCSC Track: GENCODE V43
+# Resource URL: http://genome.ucsc.edu/
+# Type of Gene ID: Entrez Gene ID
+# Full dataset: yes
+# miRBase build ID: NA
+# Nb of transcripts: 274031
+# Db created by: GenomicFeatures package from Bioconductor
+# Creation time: 2023-03-16 20:07:54 +0000 (Thu, 16 Mar 2023)
+# GenomicFeatures version at creation time: 1.51.4
+# RSQLite version at creation time: 2.3.0
+# DBSCHEMAVERSION: 1.2
+```
+
+![](igvtx.jpg)
+
+- Single-cell transcriptomics with scRNAseq and scater, including
+exploration of the Human Cell Atlas, Cell Ontology, and the OSCA book.
+
+![](scqc.jpg)
+
+Other topics should be proposed and added over time.

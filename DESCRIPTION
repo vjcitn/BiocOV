@@ -1,0 +1,28 @@
+Package: BiocOV
+Date: 2022-10-01
+Title: An overview of Bioconductor, 2023
+Version: 0.0.0
+Authors@R: 
+    c(person(
+        "Vincent", "Carey", role = c("aut", "cre"),
+        email = "stvjc@channing.harvard.edu",
+        comment = c(ORCID = "0000-0003-4046-0063")
+     )
+    )
+Description: This package is a brief overview of Bioconductor.
+	It examines three fundamental components of the project:
+	representing multiomic data in TCGA, representing genomes
+	for model organisms, and exploring single cell RNA-seq data.
+License: Artistic-2.0
+Encoding: UTF-8
+Depends: R (>= 4.2), dplyr, BSgenome, curatedTCGAData, scRNAseq,
+	scuttle, scater, TxDb.Hsapiens.UCSC.hg38.knownGene,
+	Biostrings, BSgenome.Hsapiens.UCSC.hg38, survival,
+	CuratedAtlasQueryR, org.Hs.eg.db, AnnotationDbi, GO.db
+Suggests: knitr, testthat
+VignetteBuilder: knitr
+biocViews: Infrastructure
+RoxygenNote: 7.2.3
+URL: https://github.com/vjcitn/BiocOV
+BugReports: https://github.com/vjcitn/BiocOV/issues
+

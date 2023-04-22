@@ -1,0 +1,94 @@
+---
+title: "A1: The Cancer Genome Atlas in Bioconductor"
+author: "Vincent J. Carey, stvjc at channing.harvard.edu"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{A1: The Cancer Genome Atlas in Bioconductor}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document:
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+---
+
+```{r setup,message=FALSE,echo=FALSE}
+library(BiocStyle)
+library(BiocOV)
+```
+
+# Introduction
+
+[The Cancer Genome Atlas (TCGA)](https://portal.gdc.cancer.gov/) collects information on thousands
+of cases of tumors from 68 anatomical sites.  Several approaches to working
+with TCGA are available in Bioconductor.  We'll focus on the \Biocpkg{curatedTCGAData}
+package developed by the Waldron Lab at City University of New York.
+
+```{r lkcur,message=FALSE}
+library(curatedTCGAData)
+```
+
+The following excerpt from the manual page for the `curatedTCGAData`
+function defines the scope of genomic assays available for most tumor types.
+```
+Available Assays:
+
+     Below is a list of partial ExperimentList assay names and their
+     respective description. These assays can be entered as part of the
+     'assays' argument in the main function. Partial glob matches are
+     allowed such as: ''CN*'' for "CNASeq", "CNASNP", "CNVSNP" assays.
+     Credit: Ludwig G.
+
+     ExperimentList data types   Description
+     ----------------------------------------------------------------------------
+     SummarizedExperiment*
+       RNASeqGene                Gene expression values
+       RNASeq2Gene               RSEM TPM gene expression values
+       RNASeq2GeneNorm           Upper quartile normalized RSEM TPM gene
+                                 expression values
+       miRNAArray                Probe-level  miRNA expression values
+       miRNASeqGene              Gene-level log2 RPM miRNA expression values
+       mRNAArray                 Unified gene-level mRNA expression values
+       mRNAArray_huex            Gene-level mRNA expression values from Affymetrix
+                                 Human Exon Array
+       mRNAArray_TX_g4502a       Gene-level mRNA expression values from Agilent
+                                 244K Array
+       mRNAArray_TX_ht_hg_u133a  Gene-level mRNA expression values from Affymetrix
+                                 Human Genome U133 Array
+       GISTIC_AllByGene          Gene-level GISTIC2 copy number values
+       GISTIC_ThresholdedByGene  Gene-level GISTIC2 thresholded discrete copy
+                                 number values
+       RPPAArray                 Reverse Phase Protein Array normalized protein
+                                 expression values
+     RangedSummarizedExperiment
+       GISTIC_Peaks              GISTIC2 thresholded discrete copy number values
+                                 in recurrent peak regions
+     SummarizedExperiment with HDF5Array DelayedMatrix
+       Methylation_methyl27      Probe-level methylation beta values from Illumina
+                                 HumanMethylation 27K BeadChip
+       Methylation_methyl450     Probe-level methylation beta values from Infinium
+                                 HumanMethylation 450K BeadChip
+     RaggedExperiment
+       CNASNP                    Segmented somatic Copy Number Alteration calls
+                                 from SNP array
+       CNVSNP                    Segmented germline Copy Number Variant calls from
+                                 SNP Array
+       CNASeq                    Segmented somatic Copy Number Alteration calls
+                                 from low pass DNA Sequencing
+       Mutation*                 Somatic mutations calls
+       CNACGH_CGH_hg_244a        Segmented somatic Copy Number Alteration calls
+                                 from CGH Agilent Microarray 244A
+       CNACGH_CGH_hg_415k_g4124a Segmented somatic Copy Number Alteration calls
+                                 from CGH Agilent Microarray 415K
+     * All can be converted to RangedSummarizedExperiment (except RPPAArray) with
+     TCGAutils
+     
+version:
+
+     The new version 2.0.1 includes various improvements including an
+     additional assay that provides 'RNASeq2Gene' data as RSEM TPM gene
+     expression values (issue #38). Additional changes include genomic
+```
+
