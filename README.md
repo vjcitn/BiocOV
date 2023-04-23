@@ -8,15 +8,15 @@ following topics
 - MultiAssayExperiment representation of The Cancer Genome Atlas, with
 illustration of survival analysis
 
-![](man/figures/tcgaface.jpg)
+![](https://raw.githubusercontent.com/vjcitn/BiocOV/main/man/figures/tcgaface.jpg)
 
 - Genome representation with Biostrings, BSgenome, and TxDb packages
 
-![](man/figures/igvtx.jpg)
+![](https://raw.githubusercontent.com/vjcitn/BiocOV/main/man/figures/igvtx.jpg)
 
 - Single-cell transcriptomics with scRNAseq and scater, including
 exploration of the Human Cell Atlas and Cell Ontology
 
-![](man/figures/scqc.jpg)
+![](https://raw.githubusercontent.com/vjcitn/BiocOV/main/man/figures/scqc.jpg)
 
 Other topics should be proposed and added over time.
