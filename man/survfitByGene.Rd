@@ -8,6 +8,8 @@ survfitByGene(x, genesym)
 }
 \arguments{
 \item{x}{instance of TCGAmutsurv}
+
+\item{genesym}{character(1) presence or absence of mutation in this gene is used as stratifier}
 }
 \description{
 survival fit for TCGAmutsurv

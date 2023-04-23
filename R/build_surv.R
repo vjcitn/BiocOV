@@ -48,6 +48,15 @@ build_surv_for_mut = function(project = "BRCA", min.numevents=10) {
 
 #' print for TCGAmutsurv
 #' @param x instance of TCGAmutsurv
+#' @param digits not used
+#' @param quote not used
+#' @param na.print not used 
+#' @param print.gap not used 
+#' @param right not used 
+#' @param max not used 
+#' @param width not used 
+#' @param useSource not used 
+#' @param \dots not used
 #' @note Individuals may harbor multiple mutations in genes; all events are counted.
 #' @export
 print.TCGAmutsurv = function(x, digits = NULL, quote = TRUE, na.print = NULL, print.gap = NULL, 
@@ -60,6 +69,7 @@ print.TCGAmutsurv = function(x, digits = NULL, quote = TRUE, na.print = NULL, pr
 
 #' survival fit for TCGAmutsurv
 #' @param x instance of TCGAmutsurv
+#' @param genesym character(1) presence or absence of mutation in this gene is used as stratifier
 #' @examples
 #' sk = build_surv_for_mut("SKCM")
 #' sk = survfitByGene(sk, "BRAF")

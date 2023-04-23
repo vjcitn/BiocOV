@@ -19,6 +19,24 @@
 }
 \arguments{
 \item{x}{instance of TCGAmutsurv}
+
+\item{digits}{not used}
+
+\item{quote}{not used}
+
+\item{na.print}{not used}
+
+\item{print.gap}{not used}
+
+\item{right}{not used}
+
+\item{max}{not used}
+
+\item{width}{not used}
+
+\item{useSource}{not used}
+
+\item{\dots}{not used}
 }
 \description{
 print for TCGAmutsurv

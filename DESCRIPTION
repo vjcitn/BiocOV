@@ -1,7 +1,7 @@
 Package: BiocOV
 Date: 2022-10-01
 Title: An overview of Bioconductor, 2023
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: 
     c(person(
         "Vincent", "Carey", role = c("aut", "cre"),
@@ -16,15 +16,16 @@ Description: This package is a brief overview of Bioconductor.
 License: Artistic-2.0
 Encoding: UTF-8
 Depends: R (>= 4.2)
-Suggests: dplyr, BSgenome, curatedTCGAData, scRNAseq,
+Imports: survival, curatedTCGAData
+Suggests: dplyr, BSgenome, scRNAseq,
 	scuttle, scater, TxDb.Hsapiens.UCSC.hg38.knownGene,
-	Biostrings, BSgenome.Hsapiens.UCSC.hg38, survival,
+	Biostrings, BSgenome.Hsapiens.UCSC.hg38,
 	BSgenome.Hsapiens.UCSC.hg19,
 	CuratedAtlasQueryR, org.Hs.eg.db, AnnotationDbi, GO.db,
-	knitr, testthat, TxDb.Hsapiens.UCSC.hg19.knownGene
+	knitr, testthat, TxDb.Hsapiens.UCSC.hg19.knownGene,
+	BiocStyle, TnT, DT, EnsDb.Hsapiens.v75 
 VignetteBuilder: knitr
-biocViews: Infrastructure
+biocViews: Infrastructure, Survival
 RoxygenNote: 7.2.3
 URL: https://github.com/vjcitn/BiocOV
 BugReports: https://github.com/vjcitn/BiocOV/issues
-
