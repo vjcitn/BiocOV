@@ -23,3 +23,6 @@
 \description{
 print for TCGAmutsurv
 }
+\note{
+Individuals may harbor multiple mutations in genes; all events are counted.
+}

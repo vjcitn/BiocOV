@@ -1,0 +1,188 @@
+---
+title: "A1: Basic Bioconductor packages and data structures for genomics"
+author: "Vincent J. Carey, stvjc at channing.harvard.edu"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{A1: Basic Bioconductor packages and data structures for genomics}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document:
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+---
+
+```{r setup,echo=FALSE,message=FALSE}
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+library(BiocStyle)
+library(dplyr)
+library(BiocOV)
+library(TnT)
+library(DT)
+```
+
+# Genomic annotation of organisms
+
+Institutionally curated data on model organisms
+are collected in packages with names starting with `org.`.
+
+
+```{r lkorg1,message=FALSE}
+library(org.Hs.eg.db)
+org.Hs.eg.db
+columns(org.Hs.eg.db)
+```
+
+Using `r Biocpkg("AnnotationDbi")` we can produce data.frames
+with annotation.  We'll use the gene titin (TTN) to illustrate
+acquisition of Gene Ontology annotations.
+
+```{r lk2}
+library(AnnotationDbi)
+ttnanno = AnnotationDbi::select(org.Hs.eg.db, keys="TTN", keytype="SYMBOL",
+  columns=c("ENTREZID", "ENSEMBL", "GENENAME", "GO"))
+head(ttnanno)
+```
+
+Using `r Biocpkg("GO.db")` through a helper function `decode_gotags`
+defined in `BiocOV`, we can learn aspects of gene function.
+Here we limit annotations to those identified through "traceable author statements", "TAS".
+
+```{r lk3, message=FALSE}
+library(dplyr)
+library(BiocOV)
+ttnanno |> dplyr::filter(EVIDENCE=="TAS") |> decode_gotags()
+```
+
+# Genomic sequence and genomic coordinates
+
+The full sequences of model organisms are available using
+`r Biocpkg("Biostrings")` and `r Biocpkg("BSgenome")`
+resources.
+
+```{r lkn,message=FALSE}
+library(BSgenome.Hsapiens.UCSC.hg19)
+Hsapiens
+substr(Hsapiens$chr1, 1e6, 2e6-1)
+```
+
+## UCSC gene coordinates
+
+Gene models are available in the TxDb series of packages.
+
+```{r gettx,message=FALSE}
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+txdb = TxDb.Hsapiens.UCSC.hg19.knownGene
+txdb
+g = genes(txdb)
+g
+```
+
+The `genes` function returns a GenomicRanges instance.  We
+can add gene symbols using AnnotationDbi and org.Hs.eg.db.
+
+```{r doadd}
+smap = AnnotationDbi::select(org.Hs.eg.db, 
+   keys=g$gene_id, keytype="ENTREZID", columns="SYMBOL") 
+g$gene_symbol = smap$SYMBOL
+head(g)
+```
+
+The genomic coordinates for genes of interest
+can now be retrieved from `g`.
+
+```{r getggg}
+ttnco = g[ which(g$gene_symbol == "TTN") ]
+ttnco
+```
+
+And the coding sequence can be extracted from `Hsapiens`.
+
+```{r getsq}
+substr(Hsapiens$chr2, start(ttnco), end(ttnco))
+```
+
+## Ensemble gene coordinates
+
+The EnsDb. packages provide richer
+annotation through the genes method.
+
+```{r usee}
+library(EnsDb.Hsapiens.v75) # same as hg19
+genes(EnsDb.Hsapiens.v75)
+```
+
+# Interactive visualization of genes
+
+The `r Biocpkg("TnT")` includes javascript facilities for
+interactively visualizing genomes and data collected in
+genomic coordinates.  We'll show the context of TTN.
+If you have a click-wheel it can be used to zoom in and out,
+and to pan across the genome.
+
+```{r trytnt,message=FALSE}
+library(TnT)
+```
+```{r dopl}
+gene = genes(EnsDb.Hsapiens.v75)
+ensGeneTrack <- TnT::FeatureTrack(gene, tooltip = as.data.frame(gene),
+                       names = paste(gene$symbol, " (", gene$gene_biotype, ")", sep = ""),
+                       color = TnT::mapcol(gene$gene_biotype, palette.fun = grDevices::rainbow))
+inir = GRanges("2", IRanges(179380000, 179490000))
+TnTGenome(ensGeneTrack, view.range = inir)
+```
+
+# Exercises
+
+## Tabulating annotation for a region of interest
+
+The following function obtains a data.frame with information
+about a 10Mb segment of chromosome 2.
+```{r lkg}
+ginfo = function(chr="2", start=170e6, end=180e6) {
+  g = ensembldb::genes(EnsDb.Hsapiens.v75)
+  targ = GenomicRanges::GRanges(chr, IRanges::IRanges(start, end))
+  as.data.frame(IRanges::subsetByOverlaps(g, targ))
+}
+tab = ginfo()
+```
+
+The average number of protein-coding genes per megabase in this region can
+be obtained as
+```{r lkav}
+dist = (max(tab$end) - min(tab$start))/1e6
+npc = sum(tab$gene_biotype == "protein_coding")
+npc/dist
+```
+
+What is the average number of protein-coding genes per megabase for all of chromosome 2?
+
+- You will run the `ginfo` function with different arguments.
+- The lengths of chromosomes can be obtained via `seqinfo(Hsapiens)`.
+
+## Exploring annotation on cellular localization of gene activity
+
+Here is a helper function for tabulating annotation for a gene identified by
+symbol.
+```{r dohelp}
+myanno = function(gene_symbol="BRCA2")
+    AnnotationDbi::select(org.Hs.eg.db, keys=gene_symbol, keytype="SYMBOL",
+       columns=c("ENTREZID", "ENSEMBL", "GENENAME", "GO"))
+dim(myanno())
+```
+
+We use the CC (cellular component) subontology of GO to see what components
+BRCA2 has been annotated to:
+
+```{r chkc, message=FALSE}
+library(DT)
+brtab = myanno("BRCA2") |> dplyr::filter(ONTOLOGY=="CC") |> decode_gotags()
+datatable(brtab)
+```
+
+Note that the same component can be annotated on the basis of different [evidence codes](http://geneontology.org/docs/guide-go-evidence-codes/).
+
+Find the cellular components annotated for gene ORMDL3, and for genes of your choice.

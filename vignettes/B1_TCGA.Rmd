@@ -1,10 +1,10 @@
 ---
-title: "A1: The Cancer Genome Atlas in Bioconductor"
+title: "B1: The Cancer Genome Atlas in Bioconductor"
 author: "Vincent J. Carey, stvjc at channing.harvard.edu"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{A1: The Cancer Genome Atlas in Bioconductor}
+  %\VignetteIndexEntry{B1: The Cancer Genome Atlas in Bioconductor}
   %\VignetteEncoding{UTF-8}
 output:
   BiocStyle::html_document:

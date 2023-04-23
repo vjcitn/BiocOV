@@ -7,6 +7,12 @@
     <loc>https://github.com/vjcitn/BiocOV/articles/A1_TCGA.html</loc>
   </url>
   <url>
+    <loc>https://github.com/vjcitn/BiocOV/articles/A1_basic.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/vjcitn/BiocOV/articles/B1_TCGA.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/vjcitn/BiocOV/articles/BiocOV.html</loc>
   </url>
   <url>
@@ -23,6 +29,9 @@
   </url>
   <url>
     <loc>https://github.com/vjcitn/BiocOV/reference/compare_tumors.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/vjcitn/BiocOV/reference/decode_gotags.html</loc>
   </url>
   <url>
     <loc>https://github.com/vjcitn/BiocOV/reference/index.html</loc>
