@@ -1,4 +1,4 @@
-# BORROWED FROM YESCDS FOR BiocOV
+
 
 #' use curatedTCGAData to produce survival time structure and mutation matrix for a TCGA tumor type
 #' @import survival
@@ -10,6 +10,7 @@
 #' @examples
 #' requireNamespace("survival")
 #' br = build_surv_for_mut("BRCA")
+#' br
 #' has_TTN = apply(br$mutdata, 2, function(x) any(x == "TTN", na.rm=TRUE))
 #' fi = survival::survfit(br$surv ~ has_TTN)
 #' plot(fi, lwd=2, col=c("blue", "orange"), xlab = "t = Years from diagnosis", ylab="S(t) = Prob(survive beyond t)")  # KM-plot
@@ -40,7 +41,36 @@ build_surv_for_mut = function(project = "BRCA", min.numevents=10) {
   cc5 = cc4[,rownames(posfu)]
   library(survival)
   time2 = pmax(posfu$days_to_death, posfu$days_to_last_followup, na.rm=TRUE)
-  list(surv=Surv(time2/365.25, posfu$vital_status), coldata=cdok, mutdata=cc5)
+  ans = list(surv=Surv(time2/365.25, posfu$vital_status), coldata=cdok, mutdata=cc5, project=project)
+  class(ans) = c("TCGAmutsurv", "list")
+  ans
+}
+
+#' print for TCGAmutsurv
+#' @param x instance of TCGAmutsurv
+#' @note Individuals may harbor multiple mutations in genes; all events are counted.
+#' @export
+print.TCGAmutsurv = function(x, digits = NULL, quote = TRUE, na.print = NULL, print.gap = NULL, 
+    right = FALSE, max = NULL, width = NULL, useSource = TRUE, 
+    ...) {
+ cat(sprintf("TCGAmutsurv instance for project %s, %d samples.\n", x$project, nrow(x$coldata)))
+ cat("Most commonly mutated genes:\n")
+ print(tail(sort(table(as.character(x$mutdata)))))
+}
+
+#' survival fit for TCGAmutsurv
+#' @param x instance of TCGAmutsurv
+#' @examples
+#' sk = build_surv_for_mut("SKCM")
+#' sk = survfitByGene(sk, "BRAF")
+#' plot( sk$survfit, lty=1:2, lwd=2, col=c("blue", "orange"))
+#' title("BRAF mutation in SKCM")
+#' @export
+survfitByGene = function(x, genesym) {
+ stopifnot(inherits(x, "TCGAmutsurv"))
+ has_mut = apply(x$mutdata, 2, function(x) any(x == genesym, na.rm=TRUE))
+ x$survfit = survival::survfit(x$surv ~ has_mut)
+ x
 }
 
 #' compare multiple tumor times with respect to survival
@@ -66,3 +96,5 @@ compare_tumors = function( types = c("BRCA", "GBM"), ...) {
 
 #  hasttn = apply(cc5, 2, function(x) any(x=="TTN", na.rm=TRUE))
 #  plot(survfit(ss~hasttn))
+
+

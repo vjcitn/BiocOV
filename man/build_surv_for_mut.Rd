@@ -23,6 +23,7 @@ observations lacking positive follow up time are silently omitted
 \examples{
 requireNamespace("survival")
 br = build_surv_for_mut("BRCA")
+br
 has_TTN = apply(br$mutdata, 2, function(x) any(x == "TTN", na.rm=TRUE))
 fi = survival::survfit(br$surv ~ has_TTN)
 plot(fi, lwd=2, col=c("blue", "orange"), xlab = "t = Years from diagnosis", ylab="S(t) = Prob(survive beyond t)")  # KM-plot
