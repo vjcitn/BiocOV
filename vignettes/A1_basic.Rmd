@@ -186,3 +186,45 @@ datatable(brtab)
 Note that the same component can be annotated on the basis of different [evidence codes](http://geneontology.org/docs/guide-go-evidence-codes/).
 
 Find the cellular components annotated for gene ORMDL3, and for genes of your choice.
+
+# Coordinated data structures for multisample genomics
+
+## SummarizedExperiment
+
+Relative to typical volumes and arrangements of data in scientific studies,
+genomic studies are distinguished by very large numbers of features
+collected per sample.  Measurements often fall into two classes.  
+- Matrix-like structures store
+the collection of molecular assay outputs, involving
+one or more digital measurements per genomic feature.  This component
+is referred to as "Assay".
+- In addition to the assay outputs, a data table is needed to store
+information on sample characteristics.  This component is referred
+to as "colData".
+
+Additional metadata on assay features and on the experiment as a whole
+must be accommodated, "tightly bound" with all the other information so
+that crucial information about context and interpretation do not
+scatter away.
+
+A schematic view of the "SummarizedExperiment" that collects these
+information components is here:
+
+![](SEschema.jpg)
+
+An example
+u
+
+
+The colData provides data about the patients, cell lines, or other 
+biological units, with one row per unit and one column per variable. 
+The experiments are a list of assay datasets of arbitrary class, with 
+one column per observation. The sampleMap links a single table of patient 
+data (colData) to a list of experiments via a simple but powerful 
+table of experiment:patient edges (relationships), that can be created automatically in simple 
+cases or in a spreadsheet if assay-specific sample identifiers are used. sampleMap 
+relates each column (observation) in the assays (experiments) to exactly one row 
+(biological unit) in colData; however, one row of colData may map to 
+zero, one, or more columns per assay, allowing for missing and replicate 
+assays. Green stripes indicate a mapping of one subject to multiple observations 
+across experiments.

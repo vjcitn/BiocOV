@@ -23,7 +23,8 @@ Suggests: dplyr, BSgenome, scRNAseq,
 	BSgenome.Hsapiens.UCSC.hg19,
 	CuratedAtlasQueryR, org.Hs.eg.db, AnnotationDbi, GO.db,
 	knitr, testthat, TxDb.Hsapiens.UCSC.hg19.knownGene,
-	BiocStyle, TnT, DT, EnsDb.Hsapiens.v75 
+	BiocStyle, TnT, DT, EnsDb.Hsapiens.v75,
+	ExperimentHub
 VignetteBuilder: knitr
 biocViews: Infrastructure, Survival
 RoxygenNote: 7.2.3
