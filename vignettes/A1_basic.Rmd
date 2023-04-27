@@ -212,14 +212,49 @@ information components is here:
 
 ![](SEschema.jpg)
 
-An example
-u
+An example can be obtained using ExperimentHub.
 
+```{r doex,message=FALSE}
+library(ExperimentHub)
+eh = ExperimentHub()
+tnorm = eh[["EH1044"]]
+tnorm
+```
 
-The colData provides data about the patients, cell lines, or other 
+We can compute the sequencing depth per sample
+using 
+```{r dode}
+dep = colSums(assay(tnorm))
+hist(dep, xlab="sum of counts per sample")
+```
+
+The tumor type with smallest value of depth is:
+```{r domin}
+tnorm$type[ which.min(dep) ]
+```
+
+Exercise: Three samples have depth values exceeding
+120,000,000.  What type(s) of tumors are they
+derived from?
+
+## SingleCellExperiment
+
+The explosion of interest in single-cell RNA-seq has inspired
+the extension of the SummarizedExperiment design to
+simplify common tasks employed with single-cell studies.
+
+A schematic of the `r Biocpkg("SingleCellExperiment")` class
+is:
+
+![SCE schematic](SingleCellExperiment.png)
+
+## MultiAssayExperiment
+
+- The colData provides data about the patients, cell lines, or other 
 biological units, with one row per unit and one column per variable. 
-The experiments are a list of assay datasets of arbitrary class, with 
-one column per observation. The sampleMap links a single table of patient 
+- The experiments are a list of assay datasets of arbitrary class, with 
+one column per observation. 
+- The sampleMap links a single table of patient 
 data (colData) to a list of experiments via a simple but powerful 
 table of experiment:patient edges (relationships), that can be created automatically in simple 
 cases or in a spreadsheet if assay-specific sample identifiers are used. sampleMap 
