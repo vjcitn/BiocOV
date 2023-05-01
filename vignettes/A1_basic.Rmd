@@ -221,7 +221,7 @@ tnorm = eh[["EH1044"]]
 tnorm
 ```
 
-We can compute the sequencing depth per sample
+We compute the sequencing depth per sample
 using 
 ```{r dode}
 dep = colSums(assay(tnorm))
@@ -248,7 +248,54 @@ is:
 
 ![SCE schematic](SingleCellExperiment.png)
 
+### Predicting cell type using reference expression data
+
+These illustrations are taken from the introduction to
+the [SingleR](http://bioconductor.org/books/release/SingleRBook/introduction.html) book.
+
+The "Human Primary Cell Atlas" records expression patterns
+for sorted cells.  The cell type distributions are
+tabulated here, drilling down on "T cells" for subtypes.
+```{r lklabs,message=FALSE}
+library(celldex)
+ref.data <- HumanPrimaryCellAtlasData(ensembl=TRUE)
+ref.data
+table(ref.data$label.main)
+table(ref.data$label.fine[ref.data$label.main=="T_cells"])
+```
+
+Unlabeled single-cell expression patterns were assayed on 4000 PBMCs
+using the TENx platform.  We acquire the SingleCellExperiment:
+
+```{r getpb,message=FALSE}
+library(TENxPBMCData)
+new.data <- TENxPBMCData("pbmc4k")
+```
+
+The unlabeled cells are compared to reference and
+labels are inferred using the method in
+
+```
+     Aran D, Looney AP, Liu L et al. (2019). Reference-based analysis
+     of lung single-cell sequencing reveals a transitional profibrotic
+     macrophage. _Nat. Immunology_ 20, 163–172.
+```
+
+```{r dopred,message=FALSE}
+library(SingleR)
+predictions <- SingleR(test=new.data, assay.type.test=1, 
+    ref=ref.data, labels=ref.data$label.main)
+table(predictions$labels)
+library(scater)
+nn = logNormCounts(new.data)
+nn = runPCA(nn)
+nn$type = predictions$labels
+plotPCA(nn,colour_by="type")
+```
+
 ## MultiAssayExperiment
+
+![MAE](MAE.jpg)
 
 - The colData provides data about the patients, cell lines, or other 
 biological units, with one row per unit and one column per variable. 

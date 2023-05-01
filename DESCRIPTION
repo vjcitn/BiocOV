@@ -1,7 +1,7 @@
 Package: BiocOV
 Date: 2022-10-01
 Title: An overview of Bioconductor, 2023
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: 
     c(person(
         "Vincent", "Carey", role = c("aut", "cre"),
@@ -24,7 +24,8 @@ Suggests: dplyr, BSgenome, scRNAseq,
 	CuratedAtlasQueryR, org.Hs.eg.db, AnnotationDbi, GO.db,
 	knitr, testthat, TxDb.Hsapiens.UCSC.hg19.knownGene,
 	BiocStyle, TnT, DT, EnsDb.Hsapiens.v75,
-	ExperimentHub
+	ExperimentHub, scater, celldex, SingleR,
+	TENxPBMCData
 VignetteBuilder: knitr
 biocViews: Infrastructure, Survival
 RoxygenNote: 7.2.3
