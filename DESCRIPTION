@@ -25,7 +25,7 @@ Suggests: dplyr, BSgenome, scRNAseq,
 	knitr, testthat, TxDb.Hsapiens.UCSC.hg19.knownGene,
 	BiocStyle, TnT, DT, EnsDb.Hsapiens.v75,
 	ExperimentHub, scater, celldex, SingleR,
-	TENxPBMCData
+	TENxPBMCData, plotly
 VignetteBuilder: knitr
 biocViews: Infrastructure, Survival
 RoxygenNote: 7.2.3

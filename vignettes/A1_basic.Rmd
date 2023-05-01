@@ -281,7 +281,12 @@ labels are inferred using the method in
      macrophage. _Nat. Immunology_ 20, 163–172.
 ```
 
+Notice that by using plotly for the visualization below, we can
+hover over the graph in the browser to see the cell type in a textual widget.
+
+
 ```{r dopred,message=FALSE}
+library(plotly)
 library(SingleR)
 predictions <- SingleR(test=new.data, assay.type.test=1, 
     ref=ref.data, labels=ref.data$label.main)
@@ -290,7 +295,8 @@ library(scater)
 nn = logNormCounts(new.data)
 nn = runPCA(nn)
 nn$type = predictions$labels
-plotPCA(nn,colour_by="type")
+ans = plotPCA(nn,colour_by="type")
+ggplotly(ans)
 ```
 
 ## MultiAssayExperiment
@@ -310,3 +316,5 @@ relates each column (observation) in the assays (experiments) to exactly one row
 zero, one, or more columns per assay, allowing for missing and replicate 
 assays. Green stripes indicate a mapping of one subject to multiple observations 
 across experiments.
+
+We will work with a MultiAssayExperiment in the B1 vignette.
