@@ -22,6 +22,7 @@ library(dplyr)
 library(BiocOV)
 library(TnT)
 library(DT)
+library(threejs)
 ```
 
 # Genomic annotation of organisms
@@ -212,7 +213,10 @@ information components is here:
 
 ![](SEschema.jpg)
 
-An example can be obtained using ExperimentHub.
+An example can be obtained using ExperimentHub.  This
+SummarizedExperiment instance collects all the
+non-tumor tissue samples in The Cancer Genome Atlas (TCGA), and labels them with the
+organ in which a tumor was sampled.
 
 ```{r doex,message=FALSE}
 library(ExperimentHub)
@@ -228,14 +232,28 @@ dep = colSums(assay(tnorm))
 hist(dep, xlab="sum of counts per sample")
 ```
 
-The tumor type with smallest value of depth is:
+The tissue type with smallest value of depth is:
 ```{r domin}
 tnorm$type[ which.min(dep) ]
 ```
 
-Exercise: Three samples have depth values exceeding
-120,000,000.  What type(s) of tumors are they
+### Exercises
+
+#### Most deeply sequenced
+
+Three samples have depth values exceeding
+120,000,000.  What type(s) of tissue are they
 derived from?
+
+#### A gene with bimodally distributed expression
+
+Examine the output of 
+```
+hist(as.numeric(assay(tnorm["A1BG",])))
+```
+From what tissue type are the samples with
+very high levels of A1BG derived?  Check the NCBI
+report on this gene to explain this finding.
 
 ## SingleCellExperiment
 
@@ -298,6 +316,64 @@ nn$type = predictions$labels
 ans = plotPCA(nn,colour_by="type")
 ggplotly(ans)
 ```
+
+### Exercises
+
+#### B cell subtypes
+
+Modify the code below to obtain labels and counts
+of B cell subtypes in the Human Primary Cell Atlas.
+```
+table(ref.data$label.fine[ref.data$label.main=="T_cells"])
+```
+
+#### Visualizing subtypes
+
+No coding.  How would you modify the code below
+to color the display by finer-grained cell
+classifications?
+```
+library(plotly)
+library(SingleR)
+predictions <- SingleR(test=new.data, assay.type.test=1, 
+    ref=ref.data, labels=ref.data$label.main)
+table(predictions$labels)
+library(scater)
+nn = logNormCounts(new.data)
+nn = runPCA(nn)
+nn$type = predictions$labels
+ans = plotPCA(nn,colour_by="type")
+ggplotly(ans)
+```
+
+#### Dynamic visualization
+
+This method needs some help in mapping colors to textual labels.
+
+We'll use the `R CRANpkg("threejs")` package
+to project from PC2-4 to the screen with interactive
+rotation support.
+
+First we set up a color palette:
+```{r docolset}
+mycol = palette.colors(26, "Polychrome 36")
+head(mycol)
+```
+
+Now obtain assignments of colors to cells.
+
+```{r domap}
+colinds = as.numeric(factor(nn$type))
+colors = mycol[colinds]
+```
+
+Finally produce the interactive display.
+
+```{r lkdy, message=FALSE}
+library(threejs)
+scatterplot3js( reducedDims(nn)$PCA[,2:4] ,color=unname(colors), size=.4)
+```
+
 
 ## MultiAssayExperiment
 
