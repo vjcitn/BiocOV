@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocOV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.6</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@
       <a href="../articles/A1_basic.html">A1: Basic Bioconductor packages and data structures for genomics</a>
     </li>
     <li>
-      <a href="../articles/B1_TCGA.html">B1: The Cancer Genome Atlas in Bioconductor</a>
+      <a href="../articles/B1_TCGA.html">B1: The Cancer Genome Atlas in Bioconductor -- focus on mutations</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
@@ -111,18 +111,19 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> harmonizing input:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   removing 14592 sampleMap rows not in names(experiments)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   removing 121 colData rownames not in sampleMap 'primary'</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in TCGAprimaryTumors(proj):</span> could not find function "TCGAprimaryTumors"</span>
 <span class="r-in"><span><span class="va">br</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TCGAmutsurv instance for project BRCA, 977 samples.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Most commonly mutated genes:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  GATA3   CDH1  MUC16   TP53    TTN PIK3CA </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    100    116    142    303    336    354 </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'br' not found</span>
 <span class="r-in"><span><span class="va">has_TTN</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">br</span><span class="op">$</span><span class="va">mutdata</span>, <span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"TTN"</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'br' not found</span>
 <span class="r-in"><span><span class="va">fi</span> <span class="op">=</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="va">br</span><span class="op">$</span><span class="va">surv</span> <span class="op">~</span> <span class="va">has_TTN</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(predvars, data, env):</span> object 'br' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fi</span>, lwd<span class="op">=</span><span class="fl">2</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"orange"</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"t = Years from diagnosis"</span>, ylab<span class="op">=</span><span class="st">"S(t) = Prob(survive beyond t)"</span><span class="op">)</span>  <span class="co"># KM-plot</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'plot': object 'fi' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">.3</span>, lwd<span class="op">=</span><span class="fl">2</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"orange"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TTN wild-type"</span>, <span class="st">"TTN-mutant"</span><span class="op">)</span>, bty<span class="op">=</span><span class="st">"n"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in (function (s, units = "user", cex = NULL, font = NULL, vfont = NULL,     ...) {    if (!is.null(vfont))         vfont &lt;- c(typeface = pmatch(vfont[1L], Hershey$typeface),             fontindex = pmatch(vfont[2L], Hershey$fontindex))    .External.graphics(C_strWidth, as.graphicsAnnot(s), pmatch(units,         c("user", "figure", "inches")), cex, font, vfont, ...)})(dots[[1L]][[1L]], cex = dots[[2L]][[1L]], font = dots[[3L]][[1L]],     units = "user"):</span> plot.new has not been called yet</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"TCGA BRCA survival"</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="build_surv_for_mut-1.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in title("TCGA BRCA survival"):</span> plot.new has not been called yet</span>
 </code></pre></div>
     </div>
   </div>

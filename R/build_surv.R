@@ -3,6 +3,7 @@
 #' use curatedTCGAData to produce survival time structure and mutation matrix for a TCGA tumor type
 #' @import survival
 #' @import curatedTCGAData
+#' @importFrom TCGAutils TCGAprimaryTumors
 #' @param project character(1), defaults to "BRCA"
 #' @param min.numevents numeric(1), defaults to 10; fail if there are fewer than this number of events overall
 #' @return a list with components surv, coldata, and mutdata
@@ -19,6 +20,7 @@
 #' @export
 build_surv_for_mut = function(project = "BRCA", min.numevents=10) {
   proj = curatedTCGAData(project, assays = "mutation", version="2.0.1", dry.run=FALSE)
+  proj = TCGAprimaryTumors(proj)
   bmut = experiments(proj)[[1]]
   cd = colData(proj)
   bcn = substr(colnames(bmut),1,12)

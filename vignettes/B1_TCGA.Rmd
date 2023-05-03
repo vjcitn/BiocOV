@@ -1,10 +1,10 @@
 ---
-title: "B1: The Cancer Genome Atlas in Bioconductor"
+title: "B1: The Cancer Genome Atlas in Bioconductor -- focus on mutations"
 author: "Vincent J. Carey, stvjc at channing.harvard.edu"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{B1: The Cancer Genome Atlas in Bioconductor}
+  %\VignetteIndexEntry{B1: The Cancer Genome Atlas in Bioconductor -- focus on mutations}
   %\VignetteEncoding{UTF-8}
 output:
   BiocStyle::html_document:
@@ -17,6 +17,11 @@ output:
 ```{r setup,message=FALSE,echo=FALSE}
 library(BiocStyle)
 library(BiocOV)
+library(MultiAssayExperiment)
+library(ggplot2)
+library(plotly)
+library(EnsDb.Hsapiens.v75)
+library(ensembldb)
 ```
 
 # Introduction
@@ -91,4 +96,162 @@ version:
      additional assay that provides 'RNASeq2Gene' data as RSEM TPM gene
      expression values (issue #38). Additional changes include genomic
 ```
+
+# Mutations in the BRCA collection
+
+```{r lkbrca,message=FALSE}
+library(curatedTCGAData)
+library(TCGAutils)
+br = curatedTCGAData("BRCA", "Mutation", version="2.0.1", dry.run=FALSE)
+brp = TCGAprimaryTumors(br)  # remove some normal tissue samples
+mut = experiments(brp)[[1]]
+mut
+```
+
+`mut` is an instance of the RaggedExperiment class.  This
+class was devised to accommodate data in which there is
+wide variation in the number of features recorded on
+each patient.  RaggedExperiment is also unusual in that
+there are many assay components.
+
+```{r lkan}
+length(assayNames(mut))
+head(assayNames(mut),10)
+```
+## Distributions of mutation counts
+
+This computation is unwieldy.  We just
+record the gene names and number of times
+some mutation is reported for some sample.
+
+```
+tail(sort(table(as.character(assay(mut)))),20)
+
+   SPEN   FCGBP    RYR3     DMD CROCCP2   HMCN1     DST     FLG   SYNE1    RYR2 
+     61      63      63      64      66      67      69      69      74      76 
+   MLL3    MUC4   MUC12   GATA3  MAP3K1    CDH1   MUC16    TP53     TTN  PIK3CA 
+     92      92     101     106     106     123     152     332     360     384 
+
+```
+
+The distribution of counts of mutations per individual:
+```{r indiv}
+nmut_per_sample = apply(assay(mut),2,function(x)sum(!is.na(x)))
+summary(nmut_per_sample)
+```
+
+## Identifying hypermutated samples
+
+A hypermutator:
+```{r lkhy}
+which.max(nmut_per_sample)
+table(table(assay(mut[,285])))
+which(table(assay(mut[,285]))==36)
+```
+
+Several:
+```{r lkhy2}
+hyp = tail(sort(nmut_per_sample))
+himut = mut[,names(hyp)]
+himut
+```
+This individual presents single mutations in many genes.
+```{r lkhi1}
+table(table(assay(himut[,1])))
+```
+This one has 4 genes with more than 10 mutations in each.
+```{r lkhi2}
+table(table(assay(himut[,4])))
+```
+
+## Mutation types: Insertion, deletion, ...
+
+We include some helper code here to produce comparisons
+of distributions of mutation types in genes mutated
+in breast cancer.
+
+```{r lkstr, message=FALSE}
+library(MultiAssayExperiment)
+cropSE = function (se, sym = "AHNAK", 
+  base = ensembldb::genes(EnsDb.Hsapiens.v75::EnsDb.Hsapiens.v75), gr=NULL) {
+    rr = rowRanges(se)
+    if (is.null(gr)) cr = base[which(base$symbol == sym)]
+    else cr = gr
+    fi = findOverlaps(rr, cr, ignore.strand = TRUE)
+    se[queryHits(fi), ]
+}
+
+.muttab = function(se, sym="AHNAK", 
+   base = ensembldb::genes(EnsDb.Hsapiens.v75::EnsDb.Hsapiens.v75),
+   assayind=5) {
+ cr = cropSE(se, sym, base)
+ tab = table(assay(cr,assayind))
+ data.frame(gene=sym, muttype=names(tab), freq=as.numeric(tab))
+}
+
+muttab = function(se, sym=c("MAP3K1", "CDH1", "MUC16", "TP53", "TTN", "PIK3CA"), 
+   base = ensembldb::genes(EnsDb.Hsapiens.v75::EnsDb.Hsapiens.v75),
+   assayind=5) {
+  ans = lapply(sym, function(x) .muttab(se, x, base, assayind))
+  do.call(rbind, ans)
+}
+```
+
+Here we produce an interactive plot.  You can hover over the bars
+to see text on type and count for each mutation type for each gene.
+
+```{r dopl, message=FALSE}
+dd = muttab(mut)
+library(ggplot2)
+p = ggplot(dd, aes(fill=muttype, y=freq, x=gene)) + 
+   geom_bar(stat="identity", position="dodge")
+library(plotly)
+ggplotly(p)
+```
+
+## Identifying a mutated exon
+
+We limit attention to the mutations that
+have been annotated to PIK3CA.
+```{r docrpi}
+pi = cropSE(mut, "PIK3CA")
+pi
+```
+The catalog of all exons:
+```{r lkex}
+ex = exons(EnsDb.Hsapiens.v75)
+ex
+```
+
+The findOverlaps methods work with a "query" and
+a "subject", and produce a "hits" object, which
+has methods "queryHits" and "subjectHits".
+
+```{r dofi}
+fo = findOverlaps(ex, rowRanges(pi)) 
+table(queryHits(fo))
+```
+
+Here's an exon within PIK3CA within which many mutations were observed:
+```{r lkhiex}
+ex[483987]
+lit = cropSE(mut, gr=ex[483987])
+table(start(rowRanges(lit)))
+```
+Several positions are found recurrently mutated.
+
+## Exercise
+
+What is the most commonly mutated position in the breast cancer genomes
+in TCGA?
+
+# Mutation in relation to survival times
+
+## Exercise
+
+Use `example(build_surv_for_mut)` to compare survival
+profiles for individuals with and without TTN mutation.
+
+Produce a similar display comparing individuals with and
+without PIK3CA mutation.
 

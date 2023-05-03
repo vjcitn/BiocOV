@@ -1,7 +1,7 @@
 Package: BiocOV
 Date: 2022-10-01
 Title: An overview of Bioconductor, 2023
-Version: 0.0.4
+Version: 0.0.6
 Authors@R: 
     c(person(
         "Vincent", "Carey", role = c("aut", "cre"),
@@ -16,7 +16,7 @@ Description: This package is a brief overview of Bioconductor.
 License: Artistic-2.0
 Encoding: UTF-8
 Depends: R (>= 4.2)
-Imports: survival, curatedTCGAData
+Imports: survival, curatedTCGAData, TCGAutils
 Suggests: dplyr, BSgenome, scRNAseq,
 	scuttle, scater, TxDb.Hsapiens.UCSC.hg38.knownGene,
 	Biostrings, BSgenome.Hsapiens.UCSC.hg38,

@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B1: The Cancer Genome Atlas in Bioconductor • BiocOV</title>
+<title>B1: The Cancer Genome Atlas in Bioconductor -- focus on mutations • BiocOV</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="B1: The Cancer Genome Atlas in Bioconductor">
+<script src="../pkgdown.js"></script><meta property="og:title" content="B1: The Cancer Genome Atlas in Bioconductor -- focus on mutations">
 <meta property="og:description" content="BiocOV">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocOV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.6</span>
       </span>
     </div>
 
@@ -56,7 +56,7 @@
       <a href="../articles/A1_basic.html">A1: Basic Bioconductor packages and data structures for genomics</a>
     </li>
     <li>
-      <a href="../articles/B1_TCGA.html">B1: The Cancer Genome Atlas in Bioconductor</a>
+      <a href="../articles/B1_TCGA.html">B1: The Cancer Genome Atlas in Bioconductor -- focus on mutations</a>
     </li>
   </ul>
 </li>
@@ -78,13 +78,15 @@
 
       
 
-      </header><div class="row">
+      </header><script src="B1_TCGA_files/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="B1_TCGA_files/plotly-binding-4.10.1/plotly.js"></script><script src="B1_TCGA_files/typedarray-0.1/typedarray.min.js"></script><link href="B1_TCGA_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="B1_TCGA_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="B1_TCGA_files/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="B1_TCGA_files/plotly-main-2.11.1/plotly-latest.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>B1: The Cancer Genome Atlas in Bioconductor</h1>
+      <h1 data-toc-skip>B1: The Cancer Genome Atlas in Bioconductor – focus on mutations</h1>
                         <h4 data-toc-skip class="author">Vincent J. Carey, stvjc at channing.harvard.edu</h4>
             
-            <h4 data-toc-skip class="date">May 01, 2023</h4>
+            <h4 data-toc-skip class="date">May 02, 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/vjcitn/BiocOV/blob/HEAD/vignettes/B1_TCGA.Rmd"><code>vignettes/B1_TCGA.Rmd</code></a></small>
       <div class="hidden name"><code>B1_TCGA.Rmd</code></div>
@@ -157,6 +159,211 @@ version:
      The new version 2.0.1 includes various improvements including an
      additional assay that provides 'RNASeq2Gene' data as RSEM TPM gene
      expression values (issue #38). Additional changes include genomic</code></pre>
+</div>
+<div class="section level2">
+<h2 id="mutations-in-the-brca-collection">Mutations in the BRCA collection<a class="anchor" aria-label="anchor" href="#mutations-in-the-brca-collection"></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">curatedTCGAData</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">TCGAutils</span><span class="op">)</span></span>
+<span><span class="va">br</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/curatedTCGAData/man/curatedTCGAData.html" class="external-link">curatedTCGAData</a></span><span class="op">(</span><span class="st">"BRCA"</span>, <span class="st">"Mutation"</span>, version<span class="op">=</span><span class="st">"2.0.1"</span>, dry.run<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">brp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/TCGAutils/man/TCGAprimaryTumors.html" class="external-link">TCGAprimaryTumors</a></span><span class="op">(</span><span class="va">br</span><span class="op">)</span>  <span class="co"># remove some normal tissue samples</span></span>
+<span><span class="va">mut</span> <span class="op">=</span> <span class="fu"><a href="http://waldronlab.io/MultiAssayExperiment/reference/MultiAssayExperiment-methods.html" class="external-link">experiments</a></span><span class="op">(</span><span class="va">brp</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">mut</span></span></code></pre></div>
+<pre><code><span><span class="co">## class: RaggedExperiment </span></span>
+<span><span class="co">## dim: 90490 988 </span></span>
+<span><span class="co">## assays(62): Hugo_Symbol Entrez_Gene_Id ... EVS_AA EVS_All</span></span>
+<span><span class="co">## rownames: NULL</span></span>
+<span><span class="co">## colnames(988): TCGA-A1-A0SB-01A-11D-A142-09</span></span>
+<span><span class="co">##   TCGA-A1-A0SD-01A-11D-A10Y-09 ... TCGA-PE-A5DD-01A-12D-A27P-09</span></span>
+<span><span class="co">##   TCGA-PE-A5DE-01A-11D-A27P-09</span></span>
+<span><span class="co">## colData names(0):</span></span></code></pre>
+<p><code>mut</code> is an instance of the RaggedExperiment class. This class was devised to accommodate data in which there is wide variation in the number of features recorded on each patient. RaggedExperiment is also unusual in that there are many assay components.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assayNames</a></span><span class="op">(</span><span class="va">mut</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 62</span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assayNames</a></span><span class="op">(</span><span class="va">mut</span><span class="op">)</span>,<span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] "Hugo_Symbol"            "Entrez_Gene_Id"         "Center"                </span></span>
+<span><span class="co">##  [4] "NCBI_Build"             "Variant_Classification" "Variant_Type"          </span></span>
+<span><span class="co">##  [7] "Reference_Allele"       "Tumor_Seq_Allele1"      "Tumor_Seq_Allele2"     </span></span>
+<span><span class="co">## [10] "dbSNP_RS"</span></span></code></pre>
+<div class="section level3">
+<h3 id="distributions-of-mutation-counts">Distributions of mutation counts<a class="anchor" aria-label="anchor" href="#distributions-of-mutation-counts"></a>
+</h3>
+<p>This computation is unwieldy. We just record the gene names and number of times some mutation is reported for some sample.</p>
+<pre><code>tail(sort(table(as.character(assay(mut)))),20)
+
+   SPEN   FCGBP    RYR3     DMD CROCCP2   HMCN1     DST     FLG   SYNE1    RYR2 
+     61      63      63      64      66      67      69      69      74      76 
+   MLL3    MUC4   MUC12   GATA3  MAP3K1    CDH1   MUC16    TP53     TTN  PIK3CA 
+     92      92     101     106     106     123     152     332     360     384 
+</code></pre>
+<p>The distribution of counts of mutations per individual:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nmut_per_sample</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">mut</span><span class="op">)</span>,<span class="fl">2</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">nmut_per_sample</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span><span class="co">##    1.00   28.00   43.50   91.27   79.00 5707.00</span></span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="identifying-hypermutated-samples">Identifying hypermutated samples<a class="anchor" aria-label="anchor" href="#identifying-hypermutated-samples"></a>
+</h3>
+<p>A hypermutator:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.min.html" class="external-link">which.max</a></span><span class="op">(</span><span class="va">nmut_per_sample</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## TCGA-AN-A046-01A-21W-A050-09 </span></span>
+<span><span class="co">##                          285</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">mut</span><span class="op">[</span>,<span class="fl">285</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">##    1    2    3    4    5    6    7    8    9   10   15   36 </span></span>
+<span><span class="co">## 3252  709  188   47   20   13    3    2    1    1    1    1</span></span></code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">mut</span><span class="op">[</span>,<span class="fl">285</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="fl">36</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  TTN </span></span>
+<span><span class="co">## 3795</span></span></code></pre>
+<p>Several:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hyp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">nmut_per_sample</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">himut</span> <span class="op">=</span> <span class="va">mut</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">hyp</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">himut</span></span></code></pre></div>
+<pre><code><span><span class="co">## class: RaggedExperiment </span></span>
+<span><span class="co">## dim: 90490 6 </span></span>
+<span><span class="co">## assays(62): Hugo_Symbol Entrez_Gene_Id ... EVS_AA EVS_All</span></span>
+<span><span class="co">## rownames: NULL</span></span>
+<span><span class="co">## colnames(6): TCGA-A8-A09Z-01A-11W-A019-09 TCGA-BH-A18G-01A-11D-A12B-09</span></span>
+<span><span class="co">##   ... TCGA-AC-A23H-01A-11D-A159-09 TCGA-AN-A046-01A-21W-A050-09</span></span>
+<span><span class="co">## colData names(0):</span></span></code></pre>
+<p>This individual presents single mutations in many genes.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">himut</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">##    1    2    3 </span></span>
+<span><span class="co">## 1258   87    2</span></span></code></pre>
+<p>This one has 4 genes with more than 10 mutations in each.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">himut</span><span class="op">[</span>,<span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">##    1    2    3    4    5    6    7    8   12   18   19   20 </span></span>
+<span><span class="co">## 1984  340   79   27    5    6    3    2    1    1    1    1</span></span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="mutation-types-insertion-deletion">Mutation types: Insertion, deletion, …<a class="anchor" aria-label="anchor" href="#mutation-types-insertion-deletion"></a>
+</h3>
+<p>We include some helper code here to produce comparisons of distributions of mutation types in genes mutated in breast cancer.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://waldronlab.io/MultiAssayExperiment/" class="external-link">MultiAssayExperiment</a></span><span class="op">)</span></span>
+<span><span class="va">cropSE</span> <span class="op">=</span> <span class="kw">function</span> <span class="op">(</span><span class="va">se</span>, <span class="va">sym</span> <span class="op">=</span> <span class="st">"AHNAK"</span>, </span>
+<span>  <span class="va">base</span> <span class="op">=</span> <span class="fu">ensembldb</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html" class="external-link">genes</a></span><span class="op">(</span><span class="fu">EnsDb.Hsapiens.v75</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/EnsDb.Hsapiens.v75/man/package.html" class="external-link">EnsDb.Hsapiens.v75</a></span><span class="op">)</span>, <span class="va">gr</span><span class="op">=</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">rr</span> <span class="op">=</span> <span class="fu">rowRanges</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span><span class="op">)</span> <span class="va">cr</span> <span class="op">=</span> <span class="va">base</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">base</span><span class="op">$</span><span class="va">symbol</span> <span class="op">==</span> <span class="va">sym</span><span class="op">)</span><span class="op">]</span></span>
+<span>    <span class="kw">else</span> <span class="va">cr</span> <span class="op">=</span> <span class="va">gr</span></span>
+<span>    <span class="va">fi</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">findOverlaps</a></span><span class="op">(</span><span class="va">rr</span>, <span class="va">cr</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>    <span class="va">se</span><span class="op">[</span><span class="fu">queryHits</span><span class="op">(</span><span class="va">fi</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">.muttab</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">se</span>, <span class="va">sym</span><span class="op">=</span><span class="st">"AHNAK"</span>, </span>
+<span>   <span class="va">base</span> <span class="op">=</span> <span class="fu">ensembldb</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html" class="external-link">genes</a></span><span class="op">(</span><span class="fu">EnsDb.Hsapiens.v75</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/EnsDb.Hsapiens.v75/man/package.html" class="external-link">EnsDb.Hsapiens.v75</a></span><span class="op">)</span>,</span>
+<span>   <span class="va">assayind</span><span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span> <span class="va">cr</span> <span class="op">=</span> <span class="fu">cropSE</span><span class="op">(</span><span class="va">se</span>, <span class="va">sym</span>, <span class="va">base</span><span class="op">)</span></span>
+<span> <span class="va">tab</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">cr</span>,<span class="va">assayind</span><span class="op">)</span><span class="op">)</span></span>
+<span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>gene<span class="op">=</span><span class="va">sym</span>, muttype<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span>, freq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">muttab</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">se</span>, <span class="va">sym</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAP3K1"</span>, <span class="st">"CDH1"</span>, <span class="st">"MUC16"</span>, <span class="st">"TP53"</span>, <span class="st">"TTN"</span>, <span class="st">"PIK3CA"</span><span class="op">)</span>, </span>
+<span>   <span class="va">base</span> <span class="op">=</span> <span class="fu">ensembldb</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html" class="external-link">genes</a></span><span class="op">(</span><span class="fu">EnsDb.Hsapiens.v75</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/EnsDb.Hsapiens.v75/man/package.html" class="external-link">EnsDb.Hsapiens.v75</a></span><span class="op">)</span>,</span>
+<span>   <span class="va">assayind</span><span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">ans</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">sym</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">.muttab</span><span class="op">(</span><span class="va">se</span>, <span class="va">x</span>, <span class="va">base</span>, <span class="va">assayind</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">ans</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Here we produce an interactive plot. You can hover over the bars to see text on type and count for each mutation type for each gene.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dd</span> <span class="op">=</span> <span class="fu">muttab</span><span class="op">(</span><span class="va">mut</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">muttype</span>, y<span class="op">=</span><span class="va">freq</span>, x<span class="op">=</span><span class="va">gene</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span>, position<span class="op">=</span><span class="st">"dodge"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com" class="external-link">plotly</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html" class="external-link">ggplotly</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code></pre></div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4ab054f4c399d25adf0c" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-4ab054f4c399d25adf0c">{"x":{"data":[{"orientation":"v","width":[0.128571428571429,0.1125,0.225000000000001,0.128571428571428,0.0999999999999996],"base":[0,0,0,0,0],"x":[1.61428571428571,0.60625,2.6625,4.61428571428571,5.6],"y":[33,27,1,43,12],"text":["gene: MAP3K1<br />freq:  33<br />muttype: Frame_Shift_Del","gene: CDH1<br />freq:  27<br />muttype: Frame_Shift_Del","gene: MUC16<br />freq:   1<br />muttype: Frame_Shift_Del","gene: TP53<br />freq:  43<br />muttype: Frame_Shift_Del","gene: TTN<br />freq:  12<br />muttype: Frame_Shift_Del"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Frame_Shift_Del","legendgroup":"Frame_Shift_Del","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.128571428571429,0.1125,0.128571428571428,0.0999999999999996,0.18],"base":[0,0,0,0,0],"x":[1.74285714285714,0.71875,4.74285714285714,5.7,3.64],"y":[33,30,13,5,2],"text":["gene: MAP3K1<br />freq:  33<br />muttype: Frame_Shift_Ins","gene: CDH1<br />freq:  30<br />muttype: Frame_Shift_Ins","gene: TP53<br />freq:  13<br />muttype: Frame_Shift_Ins","gene: TTN<br />freq:   5<br />muttype: Frame_Shift_Ins","gene: PIK3CA<br />freq:   2<br />muttype: Frame_Shift_Ins"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(211,146,0,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Frame_Shift_Ins","legendgroup":"Frame_Shift_Ins","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.128571428571429,0.128571428571428,0.0999999999999996,0.18],"base":[0,0,0,0],"x":[1.87142857142857,4.87142857142857,5.8,3.82],"y":[4,5,3,4],"text":["gene: MAP3K1<br />freq:   4<br />muttype: In_Frame_Del","gene: TP53<br />freq:   5<br />muttype: In_Frame_Del","gene: TTN<br />freq:   3<br />muttype: In_Frame_Del","gene: PIK3CA<br />freq:   4<br />muttype: In_Frame_Del"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(147,170,0,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"In_Frame_Del","legendgroup":"In_Frame_Del","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.1125,0.0999999999999996,0.18],"base":[0,0,0],"x":[0.83125,5.9,4],"y":[2,1,1],"text":["gene: CDH1<br />freq:   2<br />muttype: In_Frame_Ins","gene: TTN<br />freq:   1<br />muttype: In_Frame_Ins","gene: PIK3CA<br />freq:   1<br />muttype: In_Frame_Ins"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"In_Frame_Ins","legendgroup":"In_Frame_Ins","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.128571428571429,0.1125,0.225,0.128571428571428,0.0999999999999996,0.18],"base":[0,0,0,0,0,0],"x":[2,0.94375,2.8875,5,6,4.18],"y":[18,20,103,197,257,371],"text":["gene: MAP3K1<br />freq:  18<br />muttype: Missense_Mutation","gene: CDH1<br />freq:  20<br />muttype: Missense_Mutation","gene: MUC16<br />freq: 103<br />muttype: Missense_Mutation","gene: TP53<br />freq: 197<br />muttype: Missense_Mutation","gene: TTN<br />freq: 257<br />muttype: Missense_Mutation","gene: PIK3CA<br />freq: 371<br />muttype: Missense_Mutation"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,159,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Missense_Mutation","legendgroup":"Missense_Mutation","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.128571428571429,0.1125,0.225,0.128571428571428,0.0999999999999996],"base":[0,0,0,0,0],"x":[2.12857142857143,1.05625,3.1125,5.12857142857143,6.1],"y":[14,31,5,47,11],"text":["gene: MAP3K1<br />freq:  14<br />muttype: Nonsense_Mutation","gene: CDH1<br />freq:  31<br />muttype: Nonsense_Mutation","gene: MUC16<br />freq:   5<br />muttype: Nonsense_Mutation","gene: TP53<br />freq:  47<br />muttype: Nonsense_Mutation","gene: TTN<br />freq:  11<br />muttype: Nonsense_Mutation"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,185,227,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Nonsense_Mutation","legendgroup":"Nonsense_Mutation","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.1125,0.0999999999999996],"base":[0,0],"x":[1.16875,6.2],"y":[1,1],"text":["gene: CDH1<br />freq:   1<br />muttype: RNA","gene: TTN<br />freq:   1<br />muttype: RNA"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"RNA","legendgroup":"RNA","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.128571428571429,0.1125,0.225000000000001,0.128571428571428,0.0999999999999996,0.18],"base":[0,0,0,0,0,0],"x":[2.25714285714286,1.28125,3.3375,5.25714285714286,6.3,4.36],"y":[3,3,43,5,67,6],"text":["gene: MAP3K1<br />freq:   3<br />muttype: Silent","gene: CDH1<br />freq:   3<br />muttype: Silent","gene: MUC16<br />freq:  43<br />muttype: Silent","gene: TP53<br />freq:   5<br />muttype: Silent","gene: TTN<br />freq:  67<br />muttype: Silent","gene: PIK3CA<br />freq:   6<br />muttype: Silent"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(219,114,251,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Silent","legendgroup":"Silent","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.128571428571429,0.1125,0.128571428571428,0.0999999999999996],"base":[0,0,0,0],"x":[2.38571428571429,1.39375,5.38571428571429,6.4],"y":[1,9,22,4],"text":["gene: MAP3K1<br />freq:   1<br />muttype: Splice_Site","gene: CDH1<br />freq:   9<br />muttype: Splice_Site","gene: TP53<br />freq:  22<br />muttype: Splice_Site","gene: TTN<br />freq:   4<br />muttype: Splice_Site"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,97,195,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Splice_Site","legendgroup":"Splice_Site","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":27.8246364188244,"r":7.30593607305936,"b":41.7789743183678,"l":43.1050228310502},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,6.6],"tickmode":"array","ticktext":["CDH1","MAP3K1","MUC16","PIK3CA","TP53","TTN"],"tickvals":[1,2,3,4,5,6],"categoryorder":"array","categoryarray":["CDH1","MAP3K1","MUC16","PIK3CA","TP53","TTN"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"gene","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-18.55,389.55],"tickmode":"array","ticktext":["0","100","200","300"],"tickvals":[0,100,200,300],"categoryorder":"array","categoryarray":["0","100","200","300"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"freq","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"muttype","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"482e937723f14":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"482e937723f14","visdat":{"482e937723f14":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="section level3">
+<h3 id="identifying-a-mutated-exon">Identifying a mutated exon<a class="anchor" aria-label="anchor" href="#identifying-a-mutated-exon"></a>
+</h3>
+<p>We limit attention to the mutations that have been annotated to PIK3CA.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pi</span> <span class="op">=</span> <span class="fu">cropSE</span><span class="op">(</span><span class="va">mut</span>, <span class="st">"PIK3CA"</span><span class="op">)</span></span>
+<span><span class="va">pi</span></span></code></pre></div>
+<pre><code><span><span class="co">## class: RaggedExperiment </span></span>
+<span><span class="co">## dim: 387 988 </span></span>
+<span><span class="co">## assays(62): Hugo_Symbol Entrez_Gene_Id ... EVS_AA EVS_All</span></span>
+<span><span class="co">## rownames: NULL</span></span>
+<span><span class="co">## colnames(988): TCGA-A1-A0SB-01A-11D-A142-09</span></span>
+<span><span class="co">##   TCGA-A1-A0SD-01A-11D-A10Y-09 ... TCGA-PE-A5DD-01A-12D-A27P-09</span></span>
+<span><span class="co">##   TCGA-PE-A5DE-01A-11D-A27P-09</span></span>
+<span><span class="co">## colData names(0):</span></span></code></pre>
+<p>The catalog of all exons:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ex</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html" class="external-link">exons</a></span><span class="op">(</span><span class="va">EnsDb.Hsapiens.v75</span><span class="op">)</span></span>
+<span><span class="va">ex</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 745593 ranges and 1 metadata column:</span></span>
+<span><span class="co">##                   seqnames            ranges strand |         exon_id</span></span>
+<span><span class="co">##                      &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; |     &lt;character&gt;</span></span>
+<span><span class="co">##   ENSE00002234944        1       11869-12227      + | ENSE00002234944</span></span>
+<span><span class="co">##   ENSE00002234632        1       11872-12227      + | ENSE00002234632</span></span>
+<span><span class="co">##   ENSE00002269724        1       11874-12227      + | ENSE00002269724</span></span>
+<span><span class="co">##   ENSE00001948541        1       12010-12057      + | ENSE00001948541</span></span>
+<span><span class="co">##   ENSE00001671638        1       12179-12227      + | ENSE00001671638</span></span>
+<span><span class="co">##               ...      ...               ...    ... .             ...</span></span>
+<span><span class="co">##   ENSE00001741452        Y 28774418-28774584      - | ENSE00001741452</span></span>
+<span><span class="co">##   ENSE00001681574        Y 28776794-28776896      - | ENSE00001681574</span></span>
+<span><span class="co">##   ENSE00001638296        Y 28779492-28779578      - | ENSE00001638296</span></span>
+<span><span class="co">##   ENSE00001797328        Y 28780670-28780799      - | ENSE00001797328</span></span>
+<span><span class="co">##   ENSE00001794473        Y 59001391-59001635      + | ENSE00001794473</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 273 sequences (1 circular) from GRCh37 genome</span></span></code></pre>
+<p>The findOverlaps methods work with a “query” and a “subject”, and produce a “hits” object, which has methods “queryHits” and “subjectHits”.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">findOverlaps</a></span><span class="op">(</span><span class="va">ex</span>, <span class="fu">rowRanges</span><span class="op">(</span><span class="va">pi</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu">queryHits</span><span class="op">(</span><span class="va">fo</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## 483978 483979 483980 483982 483983 483984 483985 483986 483987 483989 483990 </span></span>
+<span><span class="co">##     13     13      5     23      5      1     14      1    132      4      4 </span></span>
+<span><span class="co">## 483993 483994 483995 483996 483997 483998 484002 484003 484004 </span></span>
+<span><span class="co">##     10     10      2      2      1      1      2      3    171</span></span></code></pre>
+<p>Here’s an exon within PIK3CA within which many mutations were observed:</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ex</span><span class="op">[</span><span class="fl">483987</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 1 range and 1 metadata column:</span></span>
+<span><span class="co">##                   seqnames              ranges strand |         exon_id</span></span>
+<span><span class="co">##                      &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |     &lt;character&gt;</span></span>
+<span><span class="co">##   ENSE00001077674        3 178935998-178936122      + | ENSE00001077674</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 273 sequences (1 circular) from GRCh37 genome</span></span></code></pre>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lit</span> <span class="op">=</span> <span class="fu">cropSE</span><span class="op">(</span><span class="va">mut</span>, gr<span class="op">=</span><span class="va">ex</span><span class="op">[</span><span class="fl">483987</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/start.html" class="external-link">start</a></span><span class="op">(</span><span class="fu">rowRanges</span><span class="op">(</span><span class="va">lit</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## 178936074 178936082 178936083 178936091 178936092 178936094 178936095 </span></span>
+<span><span class="co">##         2        42         2        70         5         4         7</span></span></code></pre>
+<p>Several positions are found recurrently mutated.</p>
+</div>
+<div class="section level3">
+<h3 id="exercise">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
+</h3>
+<p>What is the most commonly mutated position in the breast cancer genomes in TCGA?</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="mutation-in-relation-to-survival-times">Mutation in relation to survival times<a class="anchor" aria-label="anchor" href="#mutation-in-relation-to-survival-times"></a>
+</h2>
+<div class="section level3">
+<h3 id="exercise-1">Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"></a>
+</h3>
+<p>Use <code>example(build_surv_for_mut)</code> to compare survival profiles for individuals with and without TTN mutation.</p>
+<p>Produce a similar display comparing individuals with and without PIK3CA mutation.</p>
+</div>
 </div>
   </div>
 
