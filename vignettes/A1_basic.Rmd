@@ -23,6 +23,10 @@ library(BiocOV)
 library(TnT)
 library(DT)
 library(threejs)
+library(SingleR)
+library(TENxPBMCData)
+library(scater)
+library(plotly)
 ```
 
 # Genomic annotation of organisms
